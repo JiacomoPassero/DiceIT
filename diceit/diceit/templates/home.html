@@ -1,5 +1,54 @@
 {% extends "base.html" %}
-
+{% block head %}
+    {% load static %}
+{% endblock %}
 {% block content %}
- <h1>Roll for it</h1>
+    <div id="myCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
+        <!-- Carousel Content Goes Here -->
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+            <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+        </ol>
+
+        <!-- Slides -->
+        <div class="carousel-inner h-100">
+            <div class="carousel-item active">
+            <img src="{% static 'home/dice1.png' %}" alt="Image 1" class="d-block mx-auto">
+            <div class="carousel-caption">
+                <h3 class="text-white">Dice sets made by hand</h3>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <img src="{% static 'home/dice2.png' %}" alt="Image 2"  class="d-block mx-auto">
+            <div class="carousel-caption">
+                <h3 class="text-white">Find the perfect style for your games</h3>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <img src="{% static 'home/dice3.png' %}" alt="Image 3"  class="d-block mx-auto">
+            <div class="carousel-caption">
+                <h3 class="text-white">Collect an hoard and show it to the others dice addicted</h3>
+            </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
+        </div>
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
