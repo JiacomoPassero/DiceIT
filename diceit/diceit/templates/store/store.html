@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block head %}
+    {% load static %}
+{% endblock %}
+{% block content %}
+    <h1>Sono nello store</h1>
+
+       <div class="container">
+       
+            <div class="row justify-content-md-center">
+                {% for dice in dices %}
+                <div class="col-sm-3">
+                    <div class="card border-dark">
+                        {% with suff='set/set_' post='.png' %}
+                        <img class="card-img-top border-dark" src="{%static suff|add:dice.code|add:post %}" alt="Card image cap">
+                        {% endwith %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dice.name }}</h5>
+                            <p class="card-text">{{ dice.description }}.</p>
+                            <a href="#" class="btn btn-dark">Product page</a>
+                        </div>
+                    </div>
+                </div> 
+                {% endfor %}
+            </div>
+        
+    </div>
+    
+    
+{% endblock %}
