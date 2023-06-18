@@ -25,9 +25,9 @@ class Dice(models.Model):
         ("G","Green"),
         ("B","Blue"),
         ("P","Purple"),
-        ("B","Black"),
+        ("N","Black"),
         ("W","White"),
-        ("G","Grey"),
+        ("M","Metal"),
     ]
     
     code = models.CharField(max_length=100, primary_key=True)

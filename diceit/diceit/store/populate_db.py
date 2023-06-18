@@ -100,8 +100,8 @@ def create_dices_db():
         "B",
         "P",
         "W",
-        "G",
-        "B",
+        "M",
+        "N",
         "Y"
     )
 
