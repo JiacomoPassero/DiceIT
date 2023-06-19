@@ -1,7 +1,11 @@
 {% extends "base.html" %}
+{% block head %}
+    {% load static %}
+{% endblock %}
 {% block content %}
     <div class="container text-center">
         <h1>Logout done successfully<h1>
         <h2>Hope we'll see you again soon!!!<h2>
+        <img class="card-img-top border-dark w-50" src="{%static 'logout/dancing.gif'%}">
     </div>
 {% endblock %} 
