@@ -1,4 +1,5 @@
-from store.models import User, Dice, Purchase
+from store.models import Dice, Purchase
+from django.contrib.auth.models import User
 
 def create_users_db():
     #q = User.objects.all()
@@ -29,6 +30,7 @@ def create_users_db():
         "S4nFr4nc3sc0!"
     )
 
+    '''
     mail = (
         "capo.10@gmail.com",
         "dice@gmail.com",
@@ -41,13 +43,13 @@ def create_users_db():
         "toru@gmail.com",
         "gino.pippo@gmail.com"
     )
+    '''
 
     for i in range(0,10):
         u = User()
         u.username = utenti[i]
         u.password = password[i]
-        u.mail = mail[i]
-
+        
         u.save()
 
     print(User.objects.all())

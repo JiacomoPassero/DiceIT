@@ -1,7 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
+'''
 class User(models.Model):
     username = models.CharField(max_length=50, primary_key=True)
     password = models.CharField(max_length=150)
@@ -15,7 +16,7 @@ class User(models.Model):
             out += " : "+self.mail
     
         return out
-
+'''
 
 class Dice(models.Model):
     COLORS = [
@@ -35,7 +36,8 @@ class Dice(models.Model):
     number_of_pices = models.PositiveSmallIntegerField()
     primary_color = models.CharField(max_length=1, choices=COLORS)
     description = models.CharField(max_length=300)
-    seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    #seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    seller = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     available = models.BooleanField()
     price = models.FloatField()
 

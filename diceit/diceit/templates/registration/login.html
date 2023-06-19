@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %} 
+
+{% block title %} Login User{% endblock %} 
+
+{% block content %} 
+
+{% if "notok" in request.GET.auth %}
+<div class="alert alert-danger" role="alert">
+  Ops, you don't have the rights to go there, try to login or use another account
+</div>
+{% endif %}
+
+    <div class="container text-center">
+        <form method="post"> {% csrf_token %}
+
+        {{form | crispy}}
+    
+        <input type="submit" class="btn btn-success" value="Esegui login">
+    
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,8 +1,35 @@
 {% extends "base.html" %}
 {% block head %}
     {% load static %}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 {% endblock %}
 {% block content %}
+<!-- Il tuo codice ora è il nostro codice -->
+{% if user.is_authenticated and "ok" in request.GET.login  %}
+    <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Welcome {{user.username}} </h5>
+        </div>
+        <div class="modal-body">
+            <p> You have logged successfully </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+    </div> 
+    <script>
+        $(document).ready(function(){
+            $("#modal").modal('show');
+        });
+    </script>
+
+{% endif %}
+
+
     <h1>Sono nello store</h1>
         <form class="container" method="post">{% csrf_token %}
             <div class="form-group">
@@ -60,6 +87,5 @@
         </div>
 
         {% endif %}
-    
     
 {% endblock %}
