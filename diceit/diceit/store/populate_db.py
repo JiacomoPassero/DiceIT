@@ -1,8 +1,13 @@
 from store.models import Dice, Purchase
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 def create_users_db():
     #q = User.objects.all()
+
+    #creazione gruppi utenti
+    venditori = Group.objects.get_or_create(name='venditori')
+    #definizone permessi
 
     utenti = (
         "xX_Capodieci_Xx",

@@ -1,9 +1,12 @@
+from typing import Any, Dict
 from django.shortcuts import render
-from store.models import Dice
+from store.models import Dice, Purchase
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-
+from django.contrib.auth.decorators import login_required
+import datetime
+from django.contrib.auth.models import User
 
 # Create your views here.
 def store(request):
@@ -47,3 +50,33 @@ class UserCrateView(CreateView):
     form_class = UserCreationForm
     template_name = "store/user_create.html"
     sucess_url = reverse_lazy("login")
+
+@login_required
+def createPurchaseView(request,code):
+    #per prelevare un solo oggetto e non un query set
+
+    if request.method == "POST":
+
+        p = Purchase()
+        #ricerca diceset
+        dice = Dice.objects.get(code__iexact= request.POST['setcode'])
+        p.dice_set = dice
+        #ricerca buyer
+        buyer = User.objects.get(username__iexact=request.POST['buyer'])
+        p.buyer = buyer
+        p.date = datetime.datetime.now()
+        p.amount_of_sets = request.POST['quantity']
+        
+        p.save()
+        template= "store/sold.html"
+        #per ora, non mi serve nulla
+        ctx = {
+            'spesa' : (float(dice.price)*float(p.amount_of_sets)),
+        }
+    else:
+        dice = Dice.objects.get(code__iexact=code)
+        template="store/purchase.html"
+        ctx = {'dice' : dice,
+            }
+    
+    return render(request, template_name=template, context=ctx)

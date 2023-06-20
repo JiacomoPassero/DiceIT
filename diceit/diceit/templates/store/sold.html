@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block head %}
+    {% load static %}
+{% endblock %}
+{% block content %}
+ <div class="container text-center">
+        <h1>Purchase done succesfully</h1>
+        <h3>It cost you {{spesa}}€</h3>
+        <img class="card-img-top border-dark w-50" src="{%static 'purchase/rolling.gif'%}">
+    </div>
+{% endblock %}

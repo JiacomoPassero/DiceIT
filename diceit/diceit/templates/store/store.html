@@ -77,7 +77,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ dice.name }}</h5>
                             <p class="card-text">{{ dice.description }}.</p>
-                            <a href="#" class="btn btn-dark">Product page</a>
+                            {% with suff='' %}
+                            <a href="{%url 'store:purchase' dice.code %}" class="btn btn-dark">Product page</a>
+                            {% endwith %}
                         </div>
                     </div>
                 </div> 

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block head %}
+    {% load static %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+    <br>
+        <div class="row">
+            <div class="col-8">
+                <img class="img-fluid w-50" src="{%static 'set/set_'|add:dice.pk|add:'.png' %}" alt="Card image cap">
+            </div>
+            <div class="col-sm">
+                <h2>Complete the order</h2>
+                <form method='post'> {% csrf_token %}
+                    <div class="form-group color-secondary">
+                        <label for="buyer">Buyer(you)</label>
+                        <input name="buyer" type="text" class="form-control text-muted" id="buyer" value="{{user.username}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="setcode">Set code</label>
+                        <input name="setcode" type="text" class="form-control text-muted" id="setcode" value="{{dice.pk}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity (max 10 sets at times):</label>
+                        <input name="quantity" type="number" id="quantity" name="quantity" min="1" max="10" value="1"> 
+                    </div>
+                    <div class="form-group">
+                        <button style="margin-top: 2.5%" type="submit" class="btn btn-info">Purchase</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock%}
