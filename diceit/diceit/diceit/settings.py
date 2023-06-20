@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'crispy_forms',
     'crispy_bootstrap4',
+    'hoard.apps.HoardConfig',
 ]
 
 MIDDLEWARE = [

@@ -22,6 +22,7 @@ from store import populate_db
 urlpatterns = [
     path('', views.home, name='home'),
     path('store/', include('store.urls')),
+    path('hoard/', include('hoard.urls')),
     path('admin/', admin.site.urls),
 ]
 
