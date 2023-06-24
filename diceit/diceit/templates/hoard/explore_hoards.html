@@ -4,6 +4,25 @@
 {% endblock %}
 {% block content %}
     <br>
+    <form class="container" method="post">{% csrf_token %}
+            <div class="form-group">
+            <div class="row">
+                <div class="col-sm-3">
+                    <input name="name" class="form-control form-control-sm" type="text" placeholder="Search by name of collector">
+                </div>
+                <div class="col-sm-2">
+                    <input name="min" class="form-control form-control-sm" type="number" placeholder="Minimum of dices" min = "0">
+                </div>
+                <div class="col-sm-2">
+                    <input name="max" class="form-control form-control-sm" type="number" placeholder="Maximum of dices" min = "0" max="">
+                </div>
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+            </div>
+            </div>
+    </form>
+    <br>
     <div class= "container">
         {% for persona in collezionisti %}
         <div class="container">

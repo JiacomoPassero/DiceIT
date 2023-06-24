@@ -63,31 +63,46 @@ def ranking(num):
 @login_required
 def explore_hoards(request):
     tup = []
-    if request.method == "POST":
-        pass
-    else:
-        collezionisti = User.objects.all()
-        '''Per ogni user, prendo la somma dei dadi comprati, e se non è none, allora procedo ad elaborarla'''
-        for c in collezionisti:
-            set_comprati = Purchase.objects.filter(buyer__exact=c)
-            #nota, questo sotto restituisce comunque un dizionario, con un solo elemento
-            set_comprati = set_comprati.aggregate(Sum('amount_of_sets'))
-            set_comprati = set_comprati['amount_of_sets__sum']
-            
-            #se è none, allora non ci sono set comprati
-            if set_comprati != None:
-                col = {
-                    'user' : c,
-                    'num_set' : set_comprati,
-                    'rank' : ranking(set_comprati),
-                }
-                tup.append(col)
 
-           
-        tup.sort(reverse=True,key=returnSet)
-        #l'utente che ha comprato più dadi è il Dice Emperor
-        tup[0]["rank"] = "The Dice Emperor"
+    collezionisti = User.objects.all()
+    #Per ogni user, prendo la somma dei dadi comprati, e se non è none, allora procedo ad elaborarla
+    for c in collezionisti:
+        set_comprati = Purchase.objects.filter(buyer__exact=c)
+        #nota, questo sotto restituisce comunque un dizionario, con un solo elemento
+        set_comprati = set_comprati.aggregate(Sum('amount_of_sets'))
+        set_comprati = set_comprati['amount_of_sets__sum']
+            
+        #se è none, allora non ci sono set comprati
+        if set_comprati != None:
+            col = {
+                'user' : c,
+                'num_set' : set_comprati,
+                'rank' : ranking(set_comprati),
+            }
+            tup.append(col)
+
+    tup.sort(reverse=True,key=returnSet)
+    #l'utente che ha comprato più dadi è il Dice Emperor
+    tup[0]["rank"] = "The Dice Emperor"
     
+    #se sono arrivato tramite post, ci sono, o potrebbero essere filtri da applicare
+    if request.method == "POST":
+        name = request.POST['name']
+        min= request.POST['min']
+        max= request.POST['max']
+        #dato che ho già la classifica con i rank già fatti, mi limito ad applicare
+        #dei filtri in sequenza, partendo dal nome utente
+        if name != "":
+            tup = [t for t in tup if t['user'].username == name]
+        #numero minimo di dadi richiesti
+        if min != "":
+            min = int(min)
+            tup = [t for t in tup if t['num_set'] >= min]
+        #numero massimo di dadi richiesti
+        if max != "":
+            max = int(max)
+            tup = [t for t in tup if t['num_set'] <= max]
+
     
     ctx = {
         'collezionisti' : tup,
