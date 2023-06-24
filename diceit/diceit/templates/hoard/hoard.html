@@ -4,22 +4,34 @@
 {% endblock %}
 {% block content %}
 <h1>Sono nell'orda</h1>
-    {% for card in cards %}
     <div class="container">
         <div class="card text-center">
             <div class="card-header">
                 Go to see...
             </div>
         <div class="card-body">
-            <h5 class="card-title">{{ card.title }}</h5>
-            <p class="card-text">{{ card.subtitle }}</p>
-            <a href="#" class="btn btn-info">Go!</a>
+            <h5 class="card-title">Your Hoard</h5>
+            <p class="card-text">Check your purchases</p>
+            <a href="{% url 'hoard:show_hoard' user.username %}" class="btn btn-info">Go!</a>
         </div>
         <div class="card-footer text-muted">
-            <h5>{{ card.dice }}</h5>
+            <h5>{{ card1 }}</h5>
         </div>
     </div>
-    {% endfor %}
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-header">
+                Go to see...
+            </div>
+        <div class="card-body">
+            <h5 class="card-title">Other Hoards</h5>
+            <p class="card-text">Take inspiration from other people's collections</p>
+            <a href="{% url 'hoard:explore_hoards' %}" class="btn btn-info">Go!</a>
+        </div>
+        <div class="card-footer text-muted">
+            <h5>{{ card2 }}</h5>
+        </div>
+    </div>
     {% if lucky %}
         <div class="text-center">
             Hey, you were lucky!!!

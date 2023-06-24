@@ -57,5 +57,5 @@ class Purchase(models.Model):
     amount_of_sets = models.PositiveIntegerField()
 
     def __str__(self):
-        out = "Set "+ self.dice_set + " bought by "+ self.buyer + " on date " + self.date
+        out = "Set "+ str(self.dice_set) + " bought by "+ self.buyer.username + " on date " + str(self.date)
         return out

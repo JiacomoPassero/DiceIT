@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block head %}
+    {% load static %}
+{% endblock %}
+{% block content %}
+    <br>
+    <div class= "container">
+        {% for persona in collezionisti %}
+        <div class="container">
+            <div class="card text-center">
+                <div class="card-header">
+                    {{ persona.rank }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">The hoard of {{persona.user.username}}</h5>
+                    <p class="card-text">Has collected {{persona.num_set}} set of dices</p>
+                    <a href="{% url 'hoard:show_hoard' persona.user.username %}" class="btn btn-info">Go!</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <h5>{{ card1 }}</h5>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+{% endblock %}
