@@ -47,7 +47,7 @@
                 <div class="col-sm-3">
                     <div class="card border-dark">
                         {% with suff='set/set_' post='.png' %}
-                        <img class="card-img-top border-dark" src="{%static suff|add:dice.code|add:post %}" alt="Card image cap">
+                        <img class="card-img-top border-dark" src="{%static suff|add:dice.code|add:post %}" onerror="this.src='{%static 'set/set_default.png' %}'" alt="Card image cap">
                         {% endwith %}
                         <div class="card-body">
                             <h5 class="card-title">{{ dice.name }}</h5>

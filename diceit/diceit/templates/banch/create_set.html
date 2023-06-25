@@ -3,7 +3,11 @@
     {% load static %}
 {% endblock %}
 {% block content %}
-    <h2>Complete the order</h2>
+{% if request.method == "POST" %}
+    <div class="alert alert-success text-center" role="alert">
+       Dice set added to the store, go to <a href="{% url 'store:purchase' dice_code %}"> check </a>
+    </div>
+{% else %}
     <div class="container text-center w-50">
         <form method='post'> {% csrf_token %}
             <div class="form-group color-secondary">
@@ -16,7 +20,7 @@
             </div>
             <div class="form-group color-secondary">
                 <label for="name">Name</label>
-                <input name="name" type="text" class="form-control" id="name" value="">
+                <input name="name" type="text" class="form-control" id="name" value="A Dice Set">
             </div>
             <div class="form-group color-secondary">
                 <label for="nump">Number of pecies</label>
@@ -38,7 +42,7 @@
             </div>
             <div class="form-group color-secondary">
                 <label for="descr">Description</label>
-                <textarea name="descr" class="form-control" id="descr"></textarea>
+                <textarea name="descr" class="form-control" id="descr" value="I'm a dice set, and i am nice"></textarea>
             </div>
             <div class="form-group color-secondary">
                 <label for="avail">Availability</label>
@@ -49,11 +53,19 @@
             </div>
             <div class="form-group color-secondary">
                 <label for="price">Price</label>
-                <input name="price" id="price" type="number" class="form-select form-select-sm" min="0.00" max="10000.00" step="0.01" />
+                <input name="price" id="price" type="number" class="form-select form-select-sm" min="0.00" max="10000.00" step="0.01" value="0.01" />
+            </div>
+            <div class = "form-group color-secondary">
+                <label for="image">Set's Image</label><br>
+                <div class="alert alert-danger">Image dimensions suggested (255x255; or at the least a square one), but you are allowed to use different size</div>
+                <!-- The existing file input somewhere in our form -->
+                <input id="image" name="image" type="file" />
+                <!-- The script tag we just added to our page --> 
             </div>
             <div class="form-group">
-                <button style="margin-top: 2.5%" type="submit" class="btn btn-info">Create</button>
+                <button id="submit" style="margin-top: 2.5%" type="submit" class="btn btn-info">Create</button>
             </div>
         </form>
     </div>
+{% endif%}
 {% endblock %}

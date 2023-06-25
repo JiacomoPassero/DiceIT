@@ -8,7 +8,7 @@
         {% for acquisto in acquisti %}
             <div class="row border border-dark">
                 <div class="col-sm-2">
-                    <img class="card-img-top border-dark h-100" src="{%static 'set/set_'|add:acquisto.dice_set.code|add:'.png' %}">
+                    <img class="card-img-top border-dark h-100" src="{%static 'set/set_'|add:acquisto.dice_set.code|add:'.png' %}" onerror="this.src='{%static 'set/set_default.png' %}'">
                 </div>
                 <div class="col-sm ">
                     <div class="card-body">
