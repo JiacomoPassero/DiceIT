@@ -34,10 +34,9 @@ def show_hoard(request,user):
     acquisti = Purchase.objects.filter(buyer__exact=proprietario)
 
     acquisti = acquisti.order_by('-date')
-
     ctx = {
         'acquisti' : acquisti,
-        'prova' : acquisti[1],
+        'numset' : acquisti.count(),
     }
     return render(request, template_name='hoard/show_hoard.html', context=ctx)
 

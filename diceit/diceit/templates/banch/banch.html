@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block head %}
+    {% load static %}
+{% endblock %}
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-header">
+                Action
+            </div>
+        <div class="card-body">
+            <h5 class="card-title">Add a new dice set</h5>
+            <a href="{% url 'banch:add_set' %}" class="btn btn-info">Go!</a>
+        </div>
+        <div class="card-footer text-muted">
+            <h5>{{ card1 }}</h5>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-header">
+                Action
+            </div>
+        <div class="card-body">
+            <h5 class="card-title">Change a dice set</h5>
+            <a href="{% url 'banch:modify_set' %}" class="btn btn-info">Go!</a>
+        </div>
+        <div class="card-footer text-muted">
+            <h5>{{ card2 }}</h5>
+        </div>
+    </div>
+    {% if lucky %}
+        <div class="text-center">
+            Hey, you were lucky!!!
+        </div>
+    {% endif %}
+{% endblock %}

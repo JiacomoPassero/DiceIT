@@ -30,6 +30,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'hoard:hoard' %}">Hoard</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'banch:banch' %}">Banch</a>
+                </li>
+  
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if not user.is_authenticated %}

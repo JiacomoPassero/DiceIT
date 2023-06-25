@@ -1,13 +1,10 @@
 from store.models import Dice, Purchase
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+import datetime
 
 def create_users_db():
     #q = User.objects.all()
-
-    #creazione gruppi utenti
-    venditori = Group.objects.get_or_create(name='venditori')
-    #definizone permessi
 
     utenti = (
         "xX_Capodieci_Xx",
@@ -140,6 +137,10 @@ def create_dices_db():
         13.14        
     )
 
+     #i due artigiani
+    u1 = User.objects.get(username__iexact="GinoPippo")
+    u2 = User.objects.get(username__iexact="Yoshi")
+
     for i in range(0,10):
         d = Dice()
         d.code = code[i]
@@ -147,17 +148,72 @@ def create_dices_db():
         d.number_of_pices = number_of_pices[i]
         d.primary_color = primary_colors[i]
         d.description = descriptions[i]
-        d.seller = None
-        d.available = False
+        if(i % 2):
+            d.seller = u1
+        else:
+            d.seller = u2
+        d.available = True
         d.price = prices[i]
         d.save()
     
     print(Dice.objects.all())
 
+def create_purchases_db():
+    #creazione prima orda
+    u = User.objects.get(username__iexact="xX_Capodieci_Xx")
+    d = Dice.objects.get(code__iexact='D9')
+    datetime_object = datetime.datetime(2023,6,20)
+
+    p = Purchase()
+    p.dice_set = d
+    p.buyer = u
+    p.date = datetime_object
+    p.amount_of_sets = 7
+    p.save()
+
+    #creazione seconda orda
+
+    u = User.objects.get(username__iexact="TheDiceAddicted")
+    datetime_object = datetime.datetime(2023,6,29)
+
+    for i in ('D1','D2','D3','D4','D5','D6','D7','D8','D9','D10'):
+        p = Purchase()
+        d = Dice.objects.get(code__iexact=i)
+        p.dice_set = d
+        p.buyer = u
+        p.date = datetime_object
+        p.amount_of_sets = 10
+        p.save()
+    
+    #creazione terza orda
+    u = User.objects.get(username__iexact="LikeADragon")
+    datetime_object = datetime.datetime(2023,6,24)
+
+    for i in ('D1','D3','D5','D6','D7','D9','D10'):
+        p = Purchase()
+        d = Dice.objects.get(code__iexact=i)
+        p.dice_set = d
+        p.buyer = u
+        p.date = datetime_object
+        p.amount_of_sets = 8
+        p.save()
 
 
+    
 def erase_db():
-    User.objects.all().delete()
+    #User.objects.exclude(username="admin").delete()
     Dice.objects.all().delete()
     Purchase.objects.all().delete()
-        
+
+def populate_db():
+    #create_users_db()
+    create_dices_db()
+    create_purchases_db()
+    #creazione gruppi utenti
+    Group.objects.get_or_create(name='artigiani')
+    artigiani = Group.objects.get(name='artigiani')
+    u = User.objects.get(username__iexact="GinoPippo")
+    artigiani.user_set.add(u)
+    u = User.objects.get(username__iexact="Yoshi")
+    artigiani.user_set.add(u)
+    #definizone permessi

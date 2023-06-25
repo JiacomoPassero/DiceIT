@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'hoard.apps.HoardConfig',
+    'banch.apps.BanchConfig',
 ]
 
 MIDDLEWARE = [
@@ -130,5 +131,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
-LOGIN_REDIRECT_URL = "/store?login=ok"
+LOGIN_REDIRECT_URL = "/?login=ok"
 LOGIN_URL = "/store/login/?auth=notok"

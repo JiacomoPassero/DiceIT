@@ -22,5 +22,10 @@
             <br>
         {% endfor %}
     </div>
+    {% if numset == 0%}
+        <div class="text-center">
+            <img src="{%static 'set/empty.png' %}" class="img-fluid" alt="Try search something else">
+        </div>
+    {% endif %}
     
 {% endblock %}

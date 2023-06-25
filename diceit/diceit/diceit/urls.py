@@ -23,9 +23,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('store/', include('store.urls')),
     path('hoard/', include('hoard.urls')),
+    path('banch/', include('banch.urls')),
     path('admin/', admin.site.urls),
 ]
 
 #populate_db.erase_db()
-#populate_db.create_users_db()
-#populate_db.create_dices_db()
+#Wpopulate_db.populate_db()
