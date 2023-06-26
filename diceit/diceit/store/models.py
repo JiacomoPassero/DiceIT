@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 # Create your models here.
 
 '''
@@ -31,7 +32,7 @@ class Dice(models.Model):
         ("M","Metal"),
     ]
     
-    code = models.CharField(max_length=100, primary_key=True)
+    code = models.CharField(max_length=255, primary_key=True, unique=True)
     name = models.CharField(max_length=50)
     number_of_pices = models.PositiveSmallIntegerField()
     primary_color = models.CharField(max_length=1, choices=COLORS)
@@ -40,6 +41,9 @@ class Dice(models.Model):
     seller = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     available = models.BooleanField()
     price = models.FloatField()
+    #zona immagine
+    image = models.ImageField(upload_to='uploads/',null= True)
+    #uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         out = self.name + " of " + str(self.number_of_pices) + " pieces"

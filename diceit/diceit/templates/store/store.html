@@ -46,15 +46,14 @@
                 {% for dice in dices %}
                 <div class="col-sm-3">
                     <div class="card border-dark">
-                        {% with suff='set/set_' post='.png' %}
-                        <img class="card-img-top border-dark" src="{%static suff|add:dice.code|add:post %}" onerror="this.src='{%static 'set/set_default.png' %}'" alt="Card image cap">
-                        {% endwith %}
-                        <div class="card-body">
+
+                        <img class="card-img-top border-dark" src="{{ MEDIA_URL }}{{dice.image}}" onerror="this.src='{%static 'set/set_default.png' %}'">
+                        <div class="card-body">.
                             <h5 class="card-title">{{ dice.name }}</h5>
-                            <p class="card-text">{{ dice.description }}.</p>
-                            {% with suff='' %}
-                            <a href="{%url 'store:purchase' dice.code %}" class="btn btn-dark">Product page</a>
-                            {% endwith %}
+                            <p class="card-text">{{ dice.image }}.</p>
+
+                            <a href="{% url 'store:purchase' code=dice.code %}" class="btn btn-dark">Product page</a>
+
                         </div>
                     </div>
                 </div> 

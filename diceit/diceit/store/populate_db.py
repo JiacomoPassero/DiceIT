@@ -2,6 +2,8 @@ from store.models import Dice, Purchase
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 import datetime
+from pathlib import Path
+
 
 def create_users_db():
     #q = User.objects.all()
@@ -154,6 +156,8 @@ def create_dices_db():
             d.seller = u2
         d.available = True
         d.price = prices[i]
+        #a quanto pare non riesco a passare un singolo file usando python
+        d.image = "../static/set/set_"+str(d.code)+".png"
         d.save()
     
     print(Dice.objects.all())

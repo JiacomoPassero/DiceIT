@@ -4,6 +4,7 @@ import random
 from store.models import Purchase, Dice
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from diceit import settings
 
 
 # Create your views here.
@@ -34,9 +35,17 @@ def show_hoard(request,user):
     acquisti = Purchase.objects.filter(buyer__exact=proprietario)
 
     acquisti = acquisti.order_by('-date')
+    
+    acq = []
+    for a in acquisti:
+        dado = a.dice_set
+        #d = Dice.objects.get(code__buyer__exact=codice)
+        acq.append({'acquisto':a,'dado':dado})
+        
     ctx = {
-        'acquisti' : acquisti,
+        'acquisti' : acq,
         'numset' : acquisti.count(),
+        'MEDIA_URL' : settings.MEDIA_URL,
     }
     return render(request, template_name='hoard/show_hoard.html', context=ctx)
 

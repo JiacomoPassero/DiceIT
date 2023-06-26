@@ -1,71 +1,14 @@
 {% extends "base.html" %}
 {% block head %}
-    {% load static %}
+
+    {% load crispy_forms_tags %}
+
 {% endblock %}
 {% block content %}
-{% if request.method == "POST" %}
-    <div class="alert alert-success text-center" role="alert">
-       Dice set added to the store, go to <a href="{% url 'store:purchase' dice_code %}"> check </a>
-    </div>
-{% else %}
-    <div class="container text-center w-50">
-        <form method='post'> {% csrf_token %}
-            <div class="form-group color-secondary">
-                <label for="code">Code</label>
-                <input name="code" type="text" class="form-control text-muted" id="code" value="{{code}}" readonly>
-            </div>
-            <div class="form-group color-secondary">
-                <label for="creator">Creator(you)</label>
-                <input name="creator" type="text" class="form-control text-muted" id="creator" value="{{user.username}}" readonly>
-            </div>
-            <div class="form-group color-secondary">
-                <label for="name">Name</label>
-                <input name="name" type="text" class="form-control" id="name" value="A Dice Set">
-            </div>
-            <div class="form-group color-secondary">
-                <label for="nump">Number of pecies</label>
-                <input name="nump" type="number" class="form-control" id="nump" value="1" min="1">
-            </div>
-            <div class="form-group color-secondary">
-                <label for="color">Primary color</label>
-                <select id ="color" name='color' class="form-select form-select-sm" aria-label=".form-select-sm">
-                        <option value="R">🟥</option>
-                        <option value="O">🟧</option>
-                        <option value="Y">🟨</option>
-                        <option value="G">🟩</option>
-                        <option value="B">🟦</option>
-                        <option value="P">🟪</option>
-                        <option value="N">⬛</option>
-                        <option value="W">🔲</option>
-                        <option value="M">Metal</option>
-                    </select>
-            </div>
-            <div class="form-group color-secondary">
-                <label for="descr">Description</label>
-                <textarea name="descr" class="form-control" id="descr" value="I'm a dice set, and i am nice"></textarea>
-            </div>
-            <div class="form-group color-secondary">
-                <label for="avail">Availability</label>
-                <select id ="avail" name='avail' class="form-select form-select-sm" aria-label=".form-select-sm">
-                        <option value="Y">Available</option>
-                        <option value="N">Not Available</option>
-                </select>
-            </div>
-            <div class="form-group color-secondary">
-                <label for="price">Price</label>
-                <input name="price" id="price" type="number" class="form-select form-select-sm" min="0.00" max="10000.00" step="0.01" value="0.01" />
-            </div>
-            <div class = "form-group color-secondary">
-                <label for="image">Set's Image</label><br>
-                <div class="alert alert-danger">Image dimensions suggested (255x255; or at the least a square one), but you are allowed to use different size</div>
-                <!-- The existing file input somewhere in our form -->
-                <input id="image" name="image" type="file" />
-                <!-- The script tag we just added to our page --> 
-            </div>
-            <div class="form-group">
-                <button id="submit" style="margin-top: 2.5%" type="submit" class="btn btn-info">Create</button>
-            </div>
-        </form>
-    </div>
-{% endif%}
+    <div class="d-flex justify-content-center "> 
+
+        {% crispy form %} {% csrf_token %}
+
+    </div
+
 {% endblock %}

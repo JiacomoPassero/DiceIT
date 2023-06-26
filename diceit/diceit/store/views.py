@@ -1,4 +1,3 @@
-from typing import Any, Dict
 from django.shortcuts import render
 from store.models import Dice, Purchase
 from django.contrib.auth.forms import UserCreationForm
@@ -7,6 +6,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.contrib.auth.models import User
+
+from diceit import settings
 
 # Create your views here.
 def store(request):
@@ -33,6 +34,8 @@ def store(request):
 
     else:
         dices = Dice.objects.all()
+        for d in dices:
+            print (d.image)
 
     if not dices:
         vuoto = True
@@ -41,15 +44,16 @@ def store(request):
 
     ctx = { 
             'dices' :   dices,
-            'vuoto' : vuoto
+            'vuoto' : vuoto,
+            'MEDIA_URL' : settings.MEDIA_URL
         }
     #Stile tabella Masonry, il dislivello è voluto
     return render(request, template_name='store/store.html', context=ctx)
 
 class UserCrateView(CreateView):
     form_class = UserCreationForm
-    template_name = "store/user_create.html"
-    sucess_url = reverse_lazy("login")
+    template_name = "registration/user_create.html"
+    success_url = reverse_lazy("login")
 
 @login_required
 def createPurchaseView(request,code):
@@ -78,5 +82,7 @@ def createPurchaseView(request,code):
         template="store/purchase.html"
         ctx = {'dice' : dice,
             }
+        
+    ctx['MEDIA_URL'] = settings.MEDIA_URL
     
     return render(request, template_name=template, context=ctx)

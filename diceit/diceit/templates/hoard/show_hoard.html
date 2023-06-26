@@ -8,14 +8,14 @@
         {% for acquisto in acquisti %}
             <div class="row border border-dark">
                 <div class="col-sm-2">
-                    <img class="card-img-top border-dark h-100" src="{%static 'set/set_'|add:acquisto.dice_set.code|add:'.png' %}" onerror="this.src='{%static 'set/set_default.png' %}'">
+                    <img class="card-img-top border-dark h-100" src="{{MEDIA_URL}}{{acquisto.dado.image}}" onerror="this.src='{%static 'set/set_default.png' %}'">
                 </div>
                 <div class="col-sm ">
                     <div class="card-body">
                         <br><br>
-                        <h5 class="card-title">Set comprati: {{acquisto.amount_of_sets}} </h5>
-                        <p class="card-text">{{ acquisto.dice_set.description }}</p>
-                        <a href="{%url 'store:purchase' acquisto.dice_set.code %}" class="btn btn-info">Like what you see</a>
+                        <h5 class="card-title">Set comprati: {{acquisto.acquisto.amount_of_sets}} </h5>
+                        <p class="card-text">{{ acquisto.acquisti.dice_set.description }}</p>
+                        <a href="{% url 'store:purchase' code=acquisto.dado.code %}" class="btn btn-info">Like what you see</a>
                     </div>
                 </div>
             </div>

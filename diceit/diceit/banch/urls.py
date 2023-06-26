@@ -6,6 +6,6 @@ app_name = 'banch'
 
 urlpatterns = [
    path('', views.banch, name='banch'),
-   path('add', views.add_set, name='add_set'),
-   path('modify', views.banch, name='modify_set'),
+   path('add', views.CreateDiceView.as_view(), name='add_set'),
+   path('modify', views.modify_set, name='modify_set'),
 ]
