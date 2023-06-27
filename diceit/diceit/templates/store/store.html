@@ -48,12 +48,14 @@
                     <div class="card border-dark">
 
                         <img class="card-img-top border-dark" src="{{ MEDIA_URL }}{{dice.image}}" onerror="this.src='{%static 'set/set_default.png' %}'">
-                        <div class="card-body">.
+                        <div class="card-body">
                             <h5 class="card-title">{{ dice.name }}</h5>
-                            <p class="card-text">{{ dice.image }}.</p>
-
-                            <a href="{% url 'store:purchase' code=dice.code %}" class="btn btn-dark">Product page</a>
-
+                            <p class="card-text">{{ dice.description }}.</p>
+                            {% if dice.available %}
+                                <a href="{% url 'store:purchase' code=dice.code %}" class="btn btn-info">Product page</a>
+                            {%else%}
+                                <a href="" class="btn btn-secondary disabled" >Not available</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div> 

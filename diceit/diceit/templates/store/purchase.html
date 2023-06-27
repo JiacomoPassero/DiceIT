@@ -25,7 +25,12 @@
                         <input name="quantity" type="number" id="quantity" name="quantity" min="1" max="10" value="1"> 
                     </div>
                     <div class="form-group">
-                        <button style="margin-top: 2.5%" type="submit" class="btn btn-info">Purchase</button>
+                        {% if dice.available %}
+                            <button style="margin-top: 2.5%" type="submit" class="btn btn-info">Purchase</button>
+                        {%else%}
+                            <button style="margin-top: 2.5%" type="submit" class="btn btn-secondary" disabled>Not available</button>
+                        {% endif %}
+                        
                     </div>
                 </form>
             </div>

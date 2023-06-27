@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block head %}
+    {% load static %}
+{% endblock %}
+{% block content %}
+    <br>
+    <div class= "container w-25">
+        {% for dice in dices %}
+            <div class="row">
+                <a href="{% url 'banch:modify_set' pk=dice.code %}" class="btn btn-outline-secondary">{{ dice.code}} - {{dice.name}} </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

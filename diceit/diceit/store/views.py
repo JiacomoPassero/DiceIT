@@ -53,7 +53,7 @@ def store(request):
 class UserCrateView(CreateView):
     form_class = UserCreationForm
     template_name = "registration/user_create.html"
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy("store:login")
 
 @login_required
 def createPurchaseView(request,code):
