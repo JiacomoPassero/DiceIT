@@ -21,6 +21,7 @@ from store import populate_db
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('diventa_artigiano/', views.diventa_artigiano ,name='diventa_artigiano'),
     path('store/', include('store.urls')),
     path('hoard/', include('hoard.urls')),
     path('banch/', include('banch.urls')),
@@ -33,3 +34,5 @@ if settings.DEBUG:
    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #populate_db.erase_db()
+#populate_db.erase_purchase()
+#populate_db.create_purchases_db()

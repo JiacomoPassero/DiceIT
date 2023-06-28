@@ -209,6 +209,9 @@ def erase_db():
     Dice.objects.all().delete()
     Purchase.objects.all().delete()
 
+def erase_purchase():
+    Purchase.objects.all().delete()
+
 def populate_db():
     #create_users_db()
     create_dices_db()

@@ -30,10 +30,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'hoard:hoard' %}">Hoard</a>
                 </li>
-                <li class="nav-item">
+                
+                {% if artigiano %}
+                    <li class="nav-item">
                     <a class="nav-link" href="{% url 'banch:banch' %}">Banch</a>
-                </li>
-  
+                    </li>
+                {% elif user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'diventa_artigiano' %}">Diventa artigiano</a>
+                    </li>
+                {% endif %}
+                  
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if not user.is_authenticated %}
