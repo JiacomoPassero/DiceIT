@@ -9,6 +9,8 @@ django-crispy-forms = "*"
 crispy-bootstrap4 = "*"
 django-braces = "*"
 pillow = "*"
+numpy = "*"
+scikit-surprise = "*"
 
 [dev-packages]
 

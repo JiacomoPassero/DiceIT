@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'hoard.apps.HoardConfig',
     'banch.apps.BanchConfig',
+    'surprise',
 ]
 
 MIDDLEWARE = [
