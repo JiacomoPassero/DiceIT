@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 from. import views
 from store import populate_db
+from . import rater
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -37,3 +38,7 @@ if settings.DEBUG:
 #populate_db.erase_db()
 #populate_db.erase_purchase()
 #populate_db.create_purchases_db()
+
+#setup per rating
+rater.set_up_reccomendation_file()
+rater.start_update_thread()

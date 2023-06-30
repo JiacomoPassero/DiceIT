@@ -139,3 +139,6 @@ LOGIN_URL = "/store/login/?auth=notok"
 #per upload media
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+
+#Per aggiornamento rating sistem
+ORE_AGGIORNAMENTO_RECSYS = 1

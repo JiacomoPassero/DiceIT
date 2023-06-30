@@ -7,11 +7,17 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.contrib.auth.models import User
 
-from diceit import settings
+from diceit import settings, rater
+
+'''Funzione per calcoare la previsione di quanto sia probabile che un utente acquisti "voti alto un'altro acquisto" '''
+def suggestion(nome_utente, dado, RATER):
+    prediction = RATER.predict(nome_utente, dado)
+    #print(prediction)
+    return prediction.est
+
 
 # Create your views here.
 def store(request):
-
     #dices = Dice.objects.all()
     
     if request.method == "POST":
@@ -33,9 +39,18 @@ def store(request):
                 dices = Dice.objects.all()
 
     else:
-        dices = Dice.objects.all()
-        for d in dices:
-            print (d.image)
+        #se l'utente non ha fatto una ricerca specifica, ed è loggato, all'ora il reccomendation sistem
+        #può subentrare per ordinare i risultati
+        #for d in dices:
+        #    print (d.image)
+        if request.user.is_authenticated:
+            ret = rater.set_up_prediction()
+            dices = sorted(dices, key = lambda d: suggestion(request.user.username,d.code,ret))
+        else:
+            dices = Dice.objects.all()
+            #di base i primi set mostrati soni gli ultimi ad essere aggiunti al db
+            dices = dices.reverse()
+            
 
     if not dices:
         vuoto = True
