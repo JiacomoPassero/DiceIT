@@ -43,40 +43,7 @@ Il sistema è memory based (si basa su altri acquisti fatti da utenti) e user ba
 In base alla similarità tra gli utenti. '''
 @user_passes_test(has_group)
 def update_reccomendation(request):
-    '''
-    #devo creare una entry per ogni coppia dado - utente per permettere al rater di lavorare
-    dadi = Dice.objects.all()
-    user = User.objects.all()
-    purchases = Purchase.objects.all()
-    #inizializzo il dizionario
-    rating = {}
-    for u in user:
-        for d in dadi:
-            key = u.username + " " +d.code
-            rating[key] = 0 
     
-    #aggiorno con chi ha modificato il valore
-    for p in purchases:
-        codice_dado = p.dice_set.code
-        nome_utente = p.buyer.username
-        key =  nome_utente + " " + codice_dado
-        rating[key] = rating[key] + p.amount_of_sets
-
-
-    massimo = max(rating.values())
-    #ora ho le informazioni necessarie per costruire il rating system
-    #le salvo sul file in formato 'item' 'user' 'rating', separati da spazio
-    f = open("diceit/ratings.txt", "w")
-    for key, val in rating.items():
-        #print(key,val)
-        foo = (val*10)/massimo#aggiustamento scala per il rater
-        foo = int(foo)
-        #il rater non può lavorare con valori a 0
-        if foo == 0:
-            foo = 1
-        f.write(key+" "+str(foo)+'\n')
-
-    f.close()'''
     rater.set_up_reccomendation_file()
 
     return render(request, template_name='update_rec.html')

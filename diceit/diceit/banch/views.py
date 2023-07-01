@@ -32,6 +32,7 @@ def banch(request):
         'card1' : dice1,
         'card2' : dice2,
         'lucky' : (dice1 == dice2),
+        'artigiano' : True
     }
     return render(request, template_name='banch/banch.html', context=ctx)
 
@@ -42,7 +43,13 @@ class CreateDiceView(GroupRequiredMixin, CreateView):
     form_class = CreateDiceForm
     model = Dice
     template_name = 'banch/create_set.html'
-    success_url = reverse_lazy("banch:modify_set")        
+    success_url = reverse_lazy("banch:modify_set")  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['artigiano'] = True
+        return context      
+    
 
 @user_passes_test(has_group)
 def view_sets(request):
@@ -52,6 +59,7 @@ def view_sets(request):
     user = User.objects.get(username__iexact=username)
     d = Dice.objects.filter(seller__exact=user)
     ctx = {'dices' : d}
+    ctx['artigiano'] = True
     return render(request, template_name='banch/view_sets.html', context=ctx)
 
 class UpdateDiceView(GroupRequiredMixin,UpdateView):
@@ -70,6 +78,11 @@ class UpdateDiceView(GroupRequiredMixin,UpdateView):
     def get_success_url(self):
         pk = self.get_context_data()["object"].pk
         return reverse("store:purchase",kwargs={'code': pk})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['artigiano'] = True
+        return context
 
 
 

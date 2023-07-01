@@ -15,8 +15,9 @@
 
     {% block head %}
     {% endblock %}
-
+    {% load custom_filters %}
 </head>
+
 <body>
     <nav class="navbar navbar-expand-sm navbar-custom navbar-light">
             <div class="container-fluid h4">
@@ -31,7 +32,7 @@
                     <a class="nav-link" href="{% url 'hoard:hoard' %}">Hoard</a>
                 </li>
                 
-                {% if artigiano %}
+                {% if request.user|has_group:'artigiani' %}
                     <li class="nav-item">
                     <a class="nav-link" href="{% url 'banch:banch' %}">Banch</a>
                     </li>
