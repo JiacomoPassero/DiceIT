@@ -1,0 +1,8 @@
+librerie utilizzate:
+    django 
+    django-crispy-forms : per utilizzo e miglioramento dell'aspetto delle CBV offerte da django per login/register e altre legate ai model
+    crispy-bootstrap4 = Per accesso a librerie di bootstrap e migliormento di aspetto grafico di alcune funzionalità
+    django-braces = libreria di supporto per upload di file (nel mio caso d'uso immagini)
+    pillow = libreria di supporto per upload di file (nel mio caso d'uso immagini)
+    numpy = per esercizio e utilizzo di raccomendation system
+    scikit-surprise = per esercizio e utilizzo di raccomandation system

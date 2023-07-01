@@ -43,6 +43,7 @@ Il sistema è memory based (si basa su altri acquisti fatti da utenti) e user ba
 In base alla similarità tra gli utenti. '''
 @user_passes_test(has_group)
 def update_reccomendation(request):
+    '''
     #devo creare una entry per ogni coppia dado - utente per permettere al rater di lavorare
     dadi = Dice.objects.all()
     user = User.objects.all()
@@ -75,6 +76,7 @@ def update_reccomendation(request):
             foo = 1
         f.write(key+" "+str(foo)+'\n')
 
-    f.close()
+    f.close()'''
+    rater.set_up_reccomendation_file()
 
     return render(request, template_name='update_rec.html')

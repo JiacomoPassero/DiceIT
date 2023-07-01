@@ -43,11 +43,13 @@ def store(request):
         #può subentrare per ordinare i risultati
         #for d in dices:
         #    print (d.image)
+        dices = Dice.objects.all()
+
         if request.user.is_authenticated:
             ret = rater.set_up_prediction()
             dices = sorted(dices, key = lambda d: suggestion(request.user.username,d.code,ret))
         else:
-            dices = Dice.objects.all()
+            
             #di base i primi set mostrati soni gli ultimi ad essere aggiunti al db
             dices = dices.reverse()
             

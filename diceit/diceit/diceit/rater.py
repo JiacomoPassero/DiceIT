@@ -7,10 +7,13 @@ import threading
 import time
 from . import settings
 
-def set_up_prediction():
+'''Funzione di lettura del file dei ratings che iniziarisma l'oggetto per eseguire le predizioni.'''
+def set_up_prediction(file=None):
+    if file == None:
+        file = 'diceit/ratings.txt'
     reader = Reader(rating_scale=(1,10))
 
-    data = Dataset.load_from_file('diceit/ratings.txt',reader)
+    data = Dataset.load_from_file(file,reader)
 
     sim_options = {
         "name" : "cosine",
@@ -25,6 +28,10 @@ def set_up_prediction():
 
     return algo
 
+'''Algoritmo che a partire dal model crea il file che verrà utilizzato per fare il setup dell'algoritmo.
+Inizializza un valore e un rating per ogni utente-acquisto, dando il punteggio minimo nel caso la coppia non esiste.
+il rating dipende dal numero di volte che un utente ha comprato un set di dadi, in scala 1-10.
+Viene richiamato all'avvio del sito e ad intervalli di tempo regolari successivamente'''
 def set_up_reccomendation_file():
     #devo creare una entry per ogni coppia dado - utente per permettere al rater di lavorare
     dadi = Dice.objects.all()
@@ -46,6 +53,7 @@ def set_up_reccomendation_file():
 
 
     massimo = max(rating.values())
+
     #ora ho le informazioni necessarie per costruire il rating system
     #le salvo sul file in formato 'item' 'user' 'rating', separati da spazio
     f = open("diceit/ratings.txt", "w")
@@ -60,7 +68,8 @@ def set_up_reccomendation_file():
 
     f.close()
 
-
+'''Funzione che aggiorna automaticamente il file dei rating, il numero di ore di attesa per ripetere il processo e specificato
+in settings.py'''
 def update_file_automatico():
     while True:
         tim_sec=settings.ORE_AGGIORNAMENTO_RECSYS*60*60
@@ -68,7 +77,7 @@ def update_file_automatico():
 
         set_up_reccomendation_file()
 
-# Create and start the thread
+'''Funzione di avvio del thread di aggiornamento del file'''
 def start_update_thread():
     thread = threading.Thread(target=update_file_automatico)
     thread.start()
