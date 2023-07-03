@@ -6,3 +6,9 @@ librerie utilizzate:
     pillow = libreria di supporto per upload di file (nel mio caso d'uso immagini)
     numpy = per esercizio e utilizzo di raccomendation system
     scikit-surprise = per esercizio e utilizzo di raccomandation system
+
+prima ti eseguire i test in store, commentare da diceit/urls.py le linee di inizializzazione del rater
+rater.set_up_reccomendation_file()
+rater.start_update_thread()
+Poichè la creazione del file interagisce con modelli che nella fase di testing sono sostituiti dai database di alias, e quindi
+il programma da errore all' avvio.

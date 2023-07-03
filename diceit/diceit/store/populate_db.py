@@ -2,9 +2,9 @@ from store.models import Dice, Purchase
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 import datetime
-from pathlib import Path
 
-
+'''Attenzione: con questo metodo le password non sono salvate cifrate, quindi il login fallisce se creano gli utenti
+con questa funzione'''
 def create_users_db():
     #q = User.objects.all()
 
@@ -57,7 +57,7 @@ def create_users_db():
         u.save()
 
     print(User.objects.all())
-
+'''Attenzione: questa è una funzione deprecata poichè i dadi vengono creati senza associare dei file immagice ad essi'''
 def create_dices_db():
     code = (
         "D1",
@@ -162,6 +162,7 @@ def create_dices_db():
     
     print(Dice.objects.all())
 
+'''Funzione di creazione di acquisti, da lanciare dopo aver creato gli utenti e i dadi'''
 def create_purchases_db():
     #creazione prima orda
     u = User.objects.get(username__iexact="xX_Capodieci_Xx")
@@ -202,16 +203,17 @@ def create_purchases_db():
         p.amount_of_sets = 8
         p.save()
 
-
-    
+'''Funzione che rimove i dadi e gli acquisti''' 
 def erase_db():
     #User.objects.exclude(username="admin").delete()
     Dice.objects.all().delete()
     Purchase.objects.all().delete()
-
+'''Funzione che rimuove solo gli acquisti'''
 def erase_purchase():
     Purchase.objects.all().delete()
 
+'''Funzione per popolare le prime versioni del database, soffre delle mancanze delle altre funzione che usa.
+Deprecata'''
 def populate_db():
     #create_users_db()
     create_dices_db()
