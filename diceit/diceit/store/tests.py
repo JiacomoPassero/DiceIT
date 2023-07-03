@@ -24,8 +24,6 @@ class TestRaccomendation(TestCase):
 
     def test_dati_non_coerenti_user(self):
 
-        
-        
         previsione = self.pred.predict('non_esistente','D8')
         
         #4 indice dizionario informazioni
@@ -39,8 +37,6 @@ class TestRaccomendation(TestCase):
 
     def test_dati_non_coerenti_set(self):
 
-        
-        
         previsione = self.pred.predict('xX_Capodieci_Xx','XXX')
         
         #4 indice dizionario informazioni
