@@ -40,5 +40,9 @@ if settings.DEBUG:
 #populate_db.create_purchases_db()
 
 #setup per rating
+#populate_db.rimuovi_singolo_set("D14")
+
+
+
 rater.set_up_reccomendation_file()
-rater.start_update_thread()
+#rater.start_update_thread()

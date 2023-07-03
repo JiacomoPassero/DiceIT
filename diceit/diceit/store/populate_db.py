@@ -226,3 +226,6 @@ def populate_db():
     u = User.objects.get(username__iexact="Yoshi")
     artigiani.user_set.add(u)
     #definizone permessi
+
+def rimuovi_singolo_set(codice):
+    Dice.objects.get(code__iexact=codice).delete()
