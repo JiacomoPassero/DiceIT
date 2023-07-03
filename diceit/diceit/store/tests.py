@@ -16,8 +16,6 @@ class TestRaccomendation(TestCase):
     
     def test_dati_coerenti(self):
 
-        
-
         previsione = self.pred.predict('xX_Capodieci_Xx','D8')
 
         #la previsione deve essere nel range accettabile
